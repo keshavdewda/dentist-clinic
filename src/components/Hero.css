@@ -1,0 +1,224 @@
+/* src/components/Hero.css */
+
+/* =========================================
+   1. GLOBAL SETTINGS
+   ========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary: #2563eb;
+  --dark: #0f172a;
+  --text-gray: #64748b;
+  --white: #ffffff;
+}
+
+.hero-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: #f8fafc;
+  overflow: hidden; /* Scrollbars hide karne ke liye */
+  padding-top: 0;
+}
+
+/* =========================================
+   2. IMAGE LAYER (Backdrop)
+   ========================================= */
+.doctor-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%; /* Desktop par 50% width */
+  height: 100%;
+  z-index: 0;
+}
+
+.doctor-big-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.overlay-gradient {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  /* Desktop Gradient: Left to Right Fade */
+  background: linear-gradient(90deg, rgba(255,255,255,0) 20%, rgba(248,250,252,1) 80%);
+}
+
+/* =========================================
+   3. FLOATING NAME BADGE (Desktop & Mobile)
+   ========================================= */
+.doctors-floating-badge {
+  position: absolute;
+  bottom: 10%;
+  right: -80px; /* Text ke upar overlap karega desktop par */
+  z-index: 20;
+  animation: floatBadge 4s ease-in-out infinite;
+}
+
+.badge-content {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 50px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  min-width: 280px;
+}
+
+.doc-info { display: flex; align-items: center; gap: 8px; }
+.doc-icon { font-size: 1.2rem; }
+
+.doc-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-weight: 700;
+  color: var(--dark);
+  font-size: 0.9rem;
+  white-space: nowrap; /* Text tutega nahi */
+}
+
+.vertical-sep { width: 1px; height: 20px; background: #cbd5e1; }
+
+/* =========================================
+   4. TEXT CONTENT
+   ========================================= */
+.hero-container {
+  width: 100%; max-width: 1400px; margin: 0 auto; padding: 0 5%;
+  display: grid; grid-template-columns: 1.2fr 0.8fr;
+  align-items: center; position: relative; z-index: 2; height: 100vh;
+}
+
+.hero-content { padding-top: 60px; padding-left: 50px; }
+
+.hero-content h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1.1; color: var(--dark); margin-bottom: 1.5rem;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-content p {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem; color: var(--text-gray); line-height: 1.7;
+  margin-bottom: 2.5rem; max-width: 500px;
+}
+
+.badge-pill {
+  background: #eff6ff; color: var(--primary); padding: 8px 16px; border-radius: 30px;
+  font-weight: 700; display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 1.5rem; border: 1px solid rgba(37,99,235,0.1);
+}
+
+.hero-btns { display: flex; gap: 15px; margin-bottom: 3rem; align-items: center; }
+
+.btn-primary-hero {
+  background: var(--dark); color: var(--white); padding: 16px 32px;
+  border-radius: 50px; font-weight: 600; text-decoration: none;
+  display: flex; align-items: center; gap: 10px; transition: 0.3s;
+  box-shadow: 0 10px 20px rgba(15, 23, 42, 0.2);
+}
+.btn-primary-hero:hover { background: var(--primary); transform: translateY(-3px); }
+
+.btn-video { background: transparent; border: none; display: flex; align-items: center; gap: 10px; font-weight: 600; cursor: pointer; color: var(--dark); }
+.play-icon { width: 40px; height: 40px; background: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); color: var(--primary); }
+
+.trust-row { display: flex; gap: 30px; padding-top: 1.5rem; border-top: 1px solid #e2e8f0; }
+.divider { width: 1px; height: 40px; background: #e2e8f0; }
+
+/* =========================================
+   5. MOBILE RESPONSIVE (CRITICAL UPDATE)
+   ========================================= */
+@media (max-width: 968px) {
+  /* Step 1: Image takes Top 60% of Screen */
+  .doctor-backdrop {
+    width: 100%;
+    height: 60vh; /* Image height */
+    opacity: 1;
+    z-index: 1; /* Lowest layer */
+  }
+  
+  .doctor-big-img {
+    object-position: top center; /* Chehre par focus */
+  }
+
+  /* Gradient: Niche se white fade taaki text saaf dikhe */
+  .overlay-gradient {
+    background: linear-gradient(180deg, rgba(0,0,0,0) 50%, rgba(255,255,255,1) 100%);
+  }
+
+  /* Step 2: Name Badge Positioning (The Floating Effect) */
+  .doctors-floating-badge {
+    bottom: 20px; /* Image ke bottom edge se thoda upar */
+    left: 50%;
+    right: auto;
+    transform: translateX(-50%); /* Perfect Center */
+    width: 90%;
+    max-width: 380px;
+    animation: none; /* Animation band taaki padhne me dikkat na ho */
+    z-index: 50; /* Sabse upar */
+  }
+
+  .badge-content {
+    justify-content: space-between;
+    padding: 12px 20px;
+  }
+  
+  .doc-text { font-size: 0.8rem; } /* Mobile par text thoda chota taaki fit ho */
+
+  /* Step 3: Content Sheet (White Background) */
+  .hero-container {
+    display: block;
+    grid-template-columns: 1fr;
+    padding: 0;
+    width: 100%;
+    height: auto; /* Allow scrolling */
+  }
+
+  .hero-content {
+    /* Image (60vh) ke neeche se shuru hoga, thoda overlap (-5vh) */
+    margin-top: 59vh; 
+    background: #ffffff;
+    padding: 3rem 1.5rem 2rem 1.5rem; /* Top padding name badge ke liye */
+    border-radius: 30px 30px 0 0; /* Sheet look */
+    position: relative;
+    z-index: 10; /* Image ke upar */
+    text-align: center;
+    box-shadow: 0 -10px 40px rgba(0,0,0,0.05);
+  }
+
+  /* Adjust Text Sizes for Mobile */
+  .hero-content h1 { font-size: 2.2rem; margin-bottom: 1rem; }
+  .hero-content p { font-size: 1rem; margin-bottom: 2rem; padding: 0; }
+  
+  .hero-btns { justify-content: center; flex-direction: column; width: 100%; gap: 10px; }
+  .btn-primary-hero { width: 100%; justify-content: center; }
+  .btn-video { display: flex; } /* Video button visible */
+  
+  .trust-row { justify-content: center; padding-bottom: 30px; }
+  
+  .hero-spacer { display: none; }
+}
+
+/* Animation */
+@keyframes floatBadge {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.slide-up-text { animation: slideUp 0.8s ease-out forwards; }
+.fade-in-text { opacity: 0; animation: fadeIn 1s ease-out 0.3s forwards; }
+.fade-in-up { opacity: 0; animation: slideUp 1s ease-out 0.5s forwards; }
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes fadeIn { to { opacity: 1; } }
