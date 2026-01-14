@@ -116,31 +116,77 @@
   max-width: 600px;
 }
 
-/* Stats Row - EXACT ORIGINAL */
+/* ===== STATS ROW - FIXED FOR HORIZONTAL ALIGNMENT ===== */
 .stats-row {
   display: flex;
-  gap: 40px;
+  flex-direction: row; /* Force row on all devices */
+  justify-content: flex-start;
+  gap: 30px;
   margin-bottom: 40px;
-  padding: 25px 0;
+  padding: 20px 0;
   border-top: 1px solid var(--light-gray);
   border-bottom: 1px solid var(--light-gray);
+  width: 100%;
   max-width: fit-content;
 }
 
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  min-width: fit-content;
+}
+
 .stat-item h3 {
-  font-size: 2.5rem;
+  font-size: 2.2rem; /* Adjusted for better fit */
   font-weight: 800;
   color: var(--dark);
-  margin-bottom: 5px;
+  margin-bottom: 2px;
   line-height: 1;
 }
 
 .stat-item span {
-  font-size: 0.95rem;
+  font-size: 0.85rem;
   color: var(--gray);
   font-weight: 500;
+  white-space: nowrap; /* Text ko niche girne se rokne ke liye */
 }
 
+/* ===== RESPONSIVE FIXES FOR STATS ROW ===== */
+
+@media (max-width: 768px) {
+  .stats-row {
+    justify-content: center; /* Center align on mobile */
+    gap: 20px;
+    margin: 0 auto 30px;
+    padding: 15px 0;
+  }
+
+  .stat-item h3 {
+    font-size: 1.8rem;
+  }
+
+  .stat-item span {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .stats-row {
+    gap: 12px; /* Narrow gap for small phones */
+    padding: 12px 0;
+  }
+
+  .stat-item h3 {
+    font-size: 1.4rem;
+  }
+
+  .stat-item span {
+    font-size: 0.65rem;
+    letter-spacing: -0.2px;
+  }
+}
+
+/* Purane CSS mein se .stats-row { flex-direction: column; } ko hata dein */
 /* CTA Buttons - EXACT ORIGINAL */
 .hero-btns {
   display: flex;
