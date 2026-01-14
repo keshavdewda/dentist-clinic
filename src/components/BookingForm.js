@@ -1,92 +1,75 @@
 import React, { useState } from 'react';
-import { FaCalendarAlt, FaUser, FaPhoneAlt, FaArrowRight } from 'react-icons/fa';
+import { User, Phone, Calendar, MessageSquare, ArrowRight, CheckCircle2, Languages } from 'lucide-react';
 import './BookingForm.css';
 
 const BookingForm = () => {
-  const [formData, setFormData] = useState({ name: "", phone: "", date: "" });
+  const [formData, setFormData] = useState({ name: "", phone: "", date: "", message: "" });
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [language, setLanguage] = useState("english");
 
-  const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+  const t = {
+    english: { title: "Book Appointment", name: "Full Name", phone: "Phone Number", date: "Select Date", btn: "Confirm Now" },
+    hindi: { title: "अपॉइंटमेंट बुक करें", name: "पूरा नाम", phone: "फ़ोन नंबर", date: "तारीख चुनें", btn: "अभी बुक करें" }
   };
+
+  const curr = language === "english" ? t.english : t.hindi;
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Native Mobile Alert Style
-    alert(`Request Sent! We will call ${formData.name} shortly.`);
-    setFormData({ name: "", phone: "", date: "" });
+    setIsSubmitted(true);
+    setTimeout(() => { setIsSubmitted(false); setFormData({ name: "", phone: "", date: "", message: "" }); }, 4000);
   };
 
   return (
-    <section className="booking-section" id="contact">
+    <section className="app-container">
       <div className="form-wrapper">
-        
-        {/* Mobile Friendly Header */}
-        <div className="form-header">
-          <span className="badge">Easy Booking</span>
-          <h2>Book Your Appointment</h2>
-          <p>No waiting queue. Get confirmed slot instantly.</p>
-        </div>
-        
-        <form onSubmit={handleSubmit} className="mobile-form">
-          
-          {/* Input 1: Name */}
-          <div className="input-container">
-            <FaUser className="field-icon" />
-            <div className="field-wrapper">
-              <label htmlFor="name">Patient Name</label>
-              <input 
-                type="text" 
-                name="name" 
-                id="name"
-                placeholder="Ex. Rahul Sharma" 
-                value={formData.name} 
-                onChange={handleChange} 
-                required 
-              />
-            </div>
-          </div>
-          
-          {/* Input 2: Phone */}
-          <div className="input-container">
-            <FaPhoneAlt className="field-icon" />
-            <div className="field-wrapper">
-              <label htmlFor="phone">Mobile Number</label>
-              <input 
-                type="tel" 
-                name="phone" 
-                id="phone"
-                placeholder="10-digit number" 
-                value={formData.phone} 
-                onChange={handleChange} 
-                required 
-              />
-            </div>
-          </div>
-
-          {/* Input 3: Date */}
-          <div className="input-container">
-            <FaCalendarAlt className="field-icon" />
-            <div className="field-wrapper">
-              <label htmlFor="date">Select Date</label>
-              <input 
-                type="date" 
-                name="date" 
-                id="date"
-                value={formData.date} 
-                onChange={handleChange} 
-                required 
-              />
-            </div>
-          </div>
-
-          {/* Big Thumb-Friendly Button */}
-          <button type="submit" className="btn-action">
-            <span>Confirm Booking</span>
-            <FaArrowRight />
+        {/* Top Navigation Style Header */}
+        <div className="form-nav">
+          <button className="lang-pill" onClick={() => setLanguage(l => l === 'english' ? 'hindi' : 'english')}>
+            <Languages size={16} /> {language === 'english' ? 'Hindi' : 'English'}
           </button>
+        </div>
 
-          <p className="secure-text">🔒 Your data is safe with DentCare</p>
-        </form>
+        {isSubmitted ? (
+          <div className="status-screen">
+            <div className="check-ring"><CheckCircle2 size={48} strokeWidth={1.5} color="#00C853" /></div>
+            <h2>Booking Confirmed</h2>
+            <p>We'll reach out to you shortly, {formData.name.split(' ')[0]}.</p>
+          </div>
+        ) : (
+          <div className="content-body">
+            <div className="heading-area">
+              <h1>{curr.title}</h1>
+              <p>Quick and secure booking for your dental health.</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="modern-form">
+              <div className="input-field">
+                <User className="field-icon" size={20} />
+                <input type="text" placeholder={curr.name} required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
+              </div>
+
+              <div className="input-field">
+                <Phone className="field-icon" size={20} />
+                <input type="tel" placeholder={curr.phone} pattern="[0-9]{10}" required value={formData.phone} onChange={(e) => setFormData({...formData, phone: e.target.value})} />
+              </div>
+
+              <div className="input-field">
+                <Calendar className="field-icon" size={20} />
+                <input type="date" required value={formData.date} onChange={(e) => setFormData({...formData, date: e.target.value})} />
+              </div>
+
+              <div className="input-field align-top">
+                <MessageSquare className="field-icon" size={20} />
+                <textarea placeholder="Message (Optional)" rows="2" value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
+              </div>
+
+              <button type="submit" className="action-button">
+                {curr.btn} <ArrowRight size={20} />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </section>
   );

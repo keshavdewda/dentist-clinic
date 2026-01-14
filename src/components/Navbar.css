@@ -1,48 +1,38 @@
-/* =========================================
-   1. CORE VARIABLES & FONTS (Google Style)
-   ========================================= */
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap');
 
 :root {
-  --primary: #2563eb;       /* Corporate Blue */
-  --primary-glow: #3b82f6;  /* Lighter Blue */
-  --dark: #0f172a;          /* Slate 900 */
-  --text: #334155;          /* Slate 700 */
-  --glass-bg: rgba(255, 255, 255, 0.8);
-  --glass-border: rgba(255, 255, 255, 0.4);
-  --shadow-nav: 0 4px 30px rgba(0, 0, 0, 0.05);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); /* Apple's smooth easing */
+  --primary: #2563eb;
+  --dark: #0f172a;
+  --white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.95);
 }
 
-* {
-  box-sizing: border-box;
-  font-family: 'Plus Jakarta Sans', sans-serif; /* Modern Tech Font */
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+  font-family: 'Outfit', sans-serif; 
 }
 
-/* =========================================
-   2. NAVBAR CONTAINER
-   ========================================= */
+/* Navbar Base */
 .navbar {
-  background: transparent; /* Initially transparent */
+  background: transparent;
   height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
-  position: sticky;
+  position: fixed;
   top: 0;
+  width: 100%;
   z-index: 999;
-  transition: var(--transition);
+  transition: all 0.3s ease;
 }
 
-/* Scroll hone ke baad ye style apply hoga (Glassmorphism) */
 .navbar.active {
   background: var(--glass-bg);
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  box-shadow: var(--shadow-nav);
-  height: 70px; /* Thoda compact ho jayega scroll par */
-  border-bottom: 1px solid rgba(0,0,0,0.05);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .navbar-container {
@@ -51,169 +41,267 @@
   align-items: center;
   height: 100%;
   width: 100%;
-  max-width: 1300px;
+  max-width: 1400px;
   padding: 0 5%;
 }
 
-/* =========================================
-   3. LOGO STYLING
-   ========================================= */
+/* Logo - Bigger */
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 12px;
   cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.logo:hover {
-  transform: scale(1.02);
+  z-index: 1001;
 }
 
 .logo-img {
-  height: 45px;
+  height: 55px;
   width: auto;
-  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+  object-fit: contain;
 }
 
 .logo-text {
-  color: var(--dark);
+  font-size: 1.8rem;
   font-weight: 700;
-  font-size: 1.5rem;
-  letter-spacing: -0.5px;
+  color: var(--dark);
+  white-space: nowrap;
+  line-height: 1.2;
 }
 
 .highlight {
   color: var(--primary);
+  font-weight: 800;
 }
 
-/* =========================================
-   4. DESKTOP MENU
-   ========================================= */
+/* Menu Items */
 .nav-menu {
   display: flex;
   align-items: center;
   list-style: none;
-  text-align: center;
-  gap: 2rem;
+  gap: 30px;
+  height: 100%;
+}
+
+.nav-item {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  position: relative;
 }
 
 .nav-links {
-  color: var(--text);
+  color: var(--dark);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.95rem;
-  padding: 0.5rem 0;
-  position: relative;
-  transition: var(--transition);
-}
-
-/* Modern Underline Animation */
-.nav-links::after {
-  content: '';
-  position: absolute;
-  width: 0;
-  height: 2px;
-  bottom: 0;
-  left: 0;
-  background-color: var(--primary);
-  transition: width 0.3s ease-in-out;
-  border-radius: 2px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 0;
+  transition: color 0.3s;
 }
 
 .nav-links:hover {
   color: var(--primary);
 }
 
-.nav-links:hover::after {
-  width: 100%;
+/* Location Item */
+.location-item {
+  display: flex;
+  align-items: center;
 }
 
-/* =========================================
-   5. CTA BUTTON (The "Meta" Style Button)
-   ========================================= */
+.location-link {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.location-icon {
+  font-size: 1.2rem;
+  color: var(--dark);
+  transition: color 0.3s ease;
+}
+
+.location-link:hover .location-icon {
+  color: var(--primary);
+}
+
+/* CTA Button */
+.nav-item-btn {
+  margin-left: 10px;
+}
+
 .btn-nav {
   background: var(--dark);
-  color: #fff;
-  padding: 10px 24px;
-  border-radius: 8px; /* Slightly rounded, not full pill */
+  color: var(--white);
+  padding: 12px 28px;
+  border-radius: 8px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 0.9rem;
-  transition: var(--transition);
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+  white-space: nowrap;
 }
 
 .btn-nav:hover {
   background: var(--primary);
   transform: translateY(-2px);
-  box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.3);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
 }
 
-/* =========================================
-   6. MOBILE MENU (The Responsive Magic)
-   ========================================= */
+/* Mobile Menu Icon */
 .menu-icon {
-  display: none; /* Desktop par hidden */
+  display: none;
+  font-size: 1.8rem;
+  color: var(--dark);
+  cursor: pointer;
+  z-index: 1001;
+  padding: 5px;
 }
 
-@media screen and (max-width: 960px) {
+/* --- MOBILE RESPONSIVE --- */
+@media (max-width: 960px) {
   .menu-icon {
     display: block;
-    position: absolute;
-    top: 0;
-    right: 0;
-    transform: translate(-100%, 60%);
-    font-size: 1.8rem;
-    cursor: pointer;
-    color: var(--dark);
-    z-index: 1000;
   }
 
   .nav-menu {
-    display: flex;
-    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: -100%;
     width: 100%;
-    height: 100vh; /* Full Screen */
-    position: absolute;
-    top: 0; /* Changed from 80px to 0 for full overlay */
-    left: -100%; /* Hidden to the left */
-    opacity: 0;
-    transition: all 0.5s ease;
-    background: rgba(255, 255, 255, 0.98); /* Solid background */
+    height: 100vh;
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
-    justify-content: center; /* Center items vertically */
-    gap: 40px;
-    z-index: 998;
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 100px 5% 40px;
+    transition: all 0.5s ease;
+    gap: 0;
+    overflow-y: auto;
   }
 
   .nav-menu.active {
-    left: 0; /* Slide in */
-    opacity: 1;
-    transition: all 0.5s ease;
+    left: 0;
+  }
+
+  .nav-item {
+    width: 100%;
+    margin-bottom: 0;
+    border-bottom: 1px solid #e2e8f0;
+    height: auto;
+    padding: 15px 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+  }
+
+  .nav-item:last-child {
+    border-bottom: none;
   }
 
   .nav-links {
-    text-align: center;
-    padding: 2rem;
+    font-size: 1.2rem;
+    justify-content: flex-start;
     width: 100%;
-    display: table;
-    font-size: 1.5rem; /* Bigger font on mobile */
-    font-weight: 600;
+    padding: 0;
+    gap: 12px;
   }
 
-  .nav-links:hover {
-    color: var(--primary);
-    background-color: rgba(37, 99, 235, 0.05); /* Subtle hover bg */
+  /* Location item on mobile */
+  .location-item {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+  }
+
+  .location-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: 100%;
+  }
+
+  /* Mobile CTA Button */
+  .nav-item-btn {
+    margin: 20px 0 0 0;
+    width: 100%;
+  }
+
+  .btn-nav {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    text-align: center;
+    margin-top: 10px;
+  }
+}
+
+/* Tablet Responsive */
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 0 20px;
+  }
+
+  .logo-img {
+    height: 50px;
+  }
+
+  .logo-text {
+    font-size: 1.5rem;
+  }
+
+  .nav-menu {
+    padding: 100px 20px 40px;
+  }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+  .navbar {
+    height: 70px;
+  }
+
+  .navbar-container {
+    padding: 0 15px;
+  }
+
+  .logo {
+    gap: 8px;
+  }
+
+  .logo-img {
+    height: 45px;
+  }
+
+  .logo-text {
+    font-size: 1.3rem;
+  }
+
+  .nav-menu {
+    padding: 90px 20px 30px;
+  }
+
+  .nav-links {
+    font-size: 1.1rem;
+  }
+
+  .btn-nav {
+    padding: 15px;
+  }
+}
+
+/* Desktop adjustments */
+@media (min-width: 961px) {
+  .logo-text {
+    font-size: 1.8rem;
   }
   
-  /* Mobile Button Style */
-  .btn-nav {
-    display: block;
-    width: 80%;
-    margin: 0 auto;
-    text-align: center;
-    padding: 15px;
-    font-size: 1.2rem;
+  .logo-img {
+    height: 55px;
   }
 }
