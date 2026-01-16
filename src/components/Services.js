@@ -1,10 +1,12 @@
+import React, { useState, useEffect } from 'react';
 import {
-  FaTooth, FaSmile, FaCrown, FaAlignCenter, 
+  FaTooth, FaSmile, FaChild, FaCrown, FaAlignCenter, 
   FaTeeth, FaTeethOpen, FaMagic, FaShieldAlt, FaStar, 
-  FaArrowRight, FaPaintBrush, FaDesktop,
+  FaArrowRight, FaCheck, FaPaintBrush, FaDesktop,
   FaRobot, FaXRay
 } from 'react-icons/fa';
 import './Services.css';
+
 
 const Services = ({ isPopup = false, onBookNow }) => {
   const [activeCategory, setActiveCategory] = useState('all');
