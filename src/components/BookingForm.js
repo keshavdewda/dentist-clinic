@@ -21,7 +21,7 @@ const BookingForm = () => {
   };
 
   return (
-    <section className="app-container">
+    <section className="app-container" id="booking-section">
       <div className="form-wrapper">
         {/* Top Navigation Style Header */}
         <div className="form-nav">

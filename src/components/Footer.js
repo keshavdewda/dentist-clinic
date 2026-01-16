@@ -26,7 +26,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="footer-section" id="footer">
+    <footer className="footer-section" id="footer-section">
       
       <div className="footer-container" style={{ justifyContent: 'space-around' }}>
         

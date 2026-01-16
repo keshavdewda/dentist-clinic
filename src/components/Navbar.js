@@ -34,7 +34,7 @@ const Navbar = ({ onServicesClick }) => {
   const scrollToFooter = (e) => {
     e.preventDefault();
     closeMobileMenu();
-    const footer = document.getElementById('footer');
+    const footer = document.getElementById('footer-section');
     if (footer) {
       footer.scrollIntoView({ behavior: 'smooth' });
     }
@@ -44,7 +44,7 @@ const Navbar = ({ onServicesClick }) => {
   const scrollToBooking = (e) => {
     e.preventDefault();
     closeMobileMenu();
-    const booking = document.getElementById('booking');
+    const booking = document.getElementById('booking-section');
     if (booking) {
       booking.scrollIntoView({ behavior: 'smooth' });
     }

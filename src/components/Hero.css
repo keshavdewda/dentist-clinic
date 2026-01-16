@@ -1,6 +1,4 @@
-/* src/components/Hero.css */
-
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap");
 
 :root {
   --primary: #2563eb;
@@ -29,7 +27,7 @@
   width: 100%;
   background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
   overflow: hidden;
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   display: flex;
   align-items: center;
   padding: 100px 0 50px;
@@ -116,49 +114,66 @@
   max-width: 600px;
 }
 
-/* ===== STATS ROW - FIXED FOR HORIZONTAL ALIGNMENT ===== */
+/* ===== STATS ROW - UPDATED FOR HORIZONTAL ON ALL DEVICES ===== */
 .stats-row {
   display: flex;
-  flex-direction: row; /* Force row on all devices */
-  justify-content: flex-start;
-  gap: 30px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 15px;
   margin-bottom: 40px;
   padding: 20px 0;
   border-top: 1px solid var(--light-gray);
   border-bottom: 1px solid var(--light-gray);
   width: 100%;
-  max-width: fit-content;
+  max-width: 600px;
 }
 
 .stat-item {
   display: flex;
   flex-direction: column;
-  min-width: fit-content;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
 }
 
 .stat-item h3 {
-  font-size: 2.2rem; /* Adjusted for better fit */
+  font-size: 2.2rem;
   font-weight: 800;
   color: var(--dark);
-  margin-bottom: 2px;
+  margin-bottom: 5px;
   line-height: 1;
+  white-space: nowrap;
 }
 
 .stat-item span {
   font-size: 0.85rem;
   color: var(--gray);
   font-weight: 500;
-  white-space: nowrap; /* Text ko niche girne se rokne ke liye */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
 
 /* ===== RESPONSIVE FIXES FOR STATS ROW ===== */
 
+/* Tablets and below */
+@media (max-width: 1024px) {
+  .stats-row {
+    max-width: 500px;
+    margin: 0 auto 40px;
+  }
+}
+
+/* Mobile Large (768px and below) - UPDATED */
 @media (max-width: 768px) {
   .stats-row {
-    justify-content: center; /* Center align on mobile */
-    gap: 20px;
+    flex-direction: row;
+    gap: 10px;
     margin: 0 auto 30px;
     padding: 15px 0;
+    max-width: 100%;
   }
 
   .stat-item h3 {
@@ -167,13 +182,34 @@
 
   .stat-item span {
     font-size: 0.75rem;
+    line-height: 1.2;
   }
 }
 
+/* Mobile Small (480px and below) - UPDATED */
+@media (max-width: 480px) {
+  .stats-row {
+    gap: 8px;
+    padding: 12px 0;
+    margin: 0 auto 25px;
+  }
+
+  .stat-item h3 {
+    font-size: 1.5rem;
+  }
+
+  .stat-item span {
+    font-size: 0.7rem;
+    letter-spacing: -0.1px;
+  }
+}
+
+/* Very Small Phone (420px and below) - UPDATED */
 @media (max-width: 420px) {
   .stats-row {
-    gap: 12px; /* Narrow gap for small phones */
-    padding: 12px 0;
+    gap: 6px;
+    padding: 10px 0;
+    margin-bottom: 20px;
   }
 
   .stat-item h3 {
@@ -182,11 +218,42 @@
 
   .stat-item span {
     font-size: 0.65rem;
-    letter-spacing: -0.2px;
+    line-height: 1.1;
   }
 }
 
-/* Purane CSS mein se .stats-row { flex-direction: column; } ko hata dein */
+/* Extra Small Phone (375px and below) - UPDATED */
+@media (max-width: 375px) {
+  .stats-row {
+    gap: 4px;
+  }
+
+  .stat-item h3 {
+    font-size: 1.3rem;
+  }
+
+  .stat-item span {
+    font-size: 0.6rem;
+    padding: 0 2px;
+  }
+}
+
+/* Tiny Phone (320px and below) - ADDED FOR EXTRA SMALL SCREENS */
+@media (max-width: 320px) {
+  .stats-row {
+    gap: 3px;
+  }
+
+  .stat-item h3 {
+    font-size: 1.2rem;
+  }
+
+  .stat-item span {
+    font-size: 0.55rem;
+    letter-spacing: 0;
+  }
+}
+
 /* CTA Buttons - EXACT ORIGINAL */
 .hero-btns {
   display: flex;
@@ -220,19 +287,6 @@
   background: var(--primary);
   transform: translateY(-3px);
   box-shadow: 0 15px 30px rgba(37, 99, 235, 0.25);
-}
-
-.btn-secondary-hero {
-  background: var(--white);
-  color: var(--dark);
-  border: 2px solid var(--light-gray);
-}
-
-.btn-secondary-hero:hover {
-  border-color: var(--primary);
-  color: var(--primary);
-  transform: translateY(-3px);
-  box-shadow: var(--shadow-sm);
 }
 
 .btn-icon {
@@ -437,7 +491,9 @@
   overflow: hidden;
 }
 
-.bg-circle-1, .bg-circle-2, .bg-circle-3 {
+.bg-circle-1,
+.bg-circle-2,
+.bg-circle-3 {
   position: absolute;
   border-radius: 50%;
   background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(6, 182, 212, 0.05) 100%);
@@ -483,7 +539,8 @@
 }
 
 @keyframes float {
-  0%, 100% {
+  0%,
+  100% {
     transform: translateY(0);
   }
   50% {
@@ -557,7 +614,7 @@
   max-width: 100%;
   max-height: 80vh;
   border-radius: 8px;
-  box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   user-select: none;
   pointer-events: auto;
 }
@@ -590,8 +647,12 @@
   transform: translateY(-50%) scale(1.1);
 }
 
-.nav-left { left: 20px; }
-.nav-right { right: 20px; }
+.nav-left {
+  left: 20px;
+}
+.nav-right {
+  right: 20px;
+}
 
 .lightbox-close-btn {
   position: absolute;
@@ -620,25 +681,35 @@
 .image-counter {
   margin-top: 15px;
   color: rgba(255, 255, 255, 0.8);
-  font-family: 'Outfit', sans-serif;
+  font-family: "Outfit", sans-serif;
   font-size: 1rem;
   letter-spacing: 2px;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.5);
   padding: 5px 15px;
   border-radius: 20px;
 }
 
 @keyframes fadeInOverlay {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes zoomInImage {
-  from { transform: scale(0.9); opacity: 0.5; }
-  to { transform: scale(1); opacity: 1; }
+  from {
+    transform: scale(0.9);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }
 
-/* ===== RESPONSIVE FIXES ONLY - MINIMAL CHANGES ===== */
+/* ===== RESPONSIVE STYLES ===== */
 
 /* Large Laptops (1200px and below) */
 @media (max-width: 1200px) {
@@ -646,19 +717,20 @@
     max-width: 1100px;
     padding: 0 4%;
   }
-  
+
   .hero-content h1 {
     font-size: 3.5rem;
   }
-  
+
   .hero-gradient {
     font-size: 3.5rem;
   }
-  
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 450px;
   }
-  
+
   .bg-circle-1 {
     width: 350px;
     height: 350px;
@@ -672,52 +744,58 @@
   .hero-section {
     padding: 90px 0 40px;
   }
-  
+
   .hero-container {
     grid-template-columns: 1fr;
     gap: 50px;
     padding: 0 30px;
   }
-  
+
   .hero-content {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
   }
-  
+
   .hero-image-section {
     order: -1;
     max-width: 600px;
     margin: 0 auto;
   }
-  
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 400px;
     max-width: 600px;
     margin: 0 auto;
   }
-  
+
+  /* GALLERY - Edge to edge */
   .clinic-preview-section {
-    max-width: 600px;
-    margin: 0 auto;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    border-radius: 0;
+    padding: 25px 20px;
+    box-shadow: none;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   }
-  
-  .stats-row {
-    margin: 0 auto 40px;
-  }
-  
+
   .doctor-badge {
     margin: 0 auto;
   }
-  
+
   .bg-circle-1 {
     width: 300px;
     height: 300px;
     top: -60px;
     right: -60px;
   }
-  
+
   .bg-circle-2 {
     width: 250px;
     height: 250px;
@@ -732,102 +810,102 @@
     padding: 80px 0 30px;
     min-height: auto;
   }
-  
+
   .hero-container {
     padding: 0 20px;
     gap: 40px;
   }
-  
+
   .hero-content h1 {
     font-size: 2.8rem;
     line-height: 1.2;
   }
-  
+
   .hero-gradient {
     font-size: 2.8rem;
   }
-  
+
   .hero-content p {
     font-size: 1.1rem;
     line-height: 1.6;
   }
-  
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 350px;
     border-width: 6px;
     transform: none;
   }
-  
+
   .doctor-main-img:hover {
     transform: none;
   }
-  
-  .stats-row {
-    flex-direction: column;
-    gap: 25px;
-    padding: 20px 0;
-    align-items: center;
-  }
-  
-  .stat-item {
-    text-align: center;
-  }
-  
-  .stat-item h3 {
-    font-size: 2.2rem;
-  }
-  
+
   .hero-btns {
     flex-direction: column;
     width: 100%;
     max-width: 300px;
   }
-  
+
   .btn {
     width: 100%;
     padding: 16px 28px;
   }
-  
+
   .floating-experience {
     padding: 12px 20px;
     bottom: -15px;
     right: 15px;
   }
-  
+
   .exp-content h3 {
     font-size: 2rem;
   }
-  
+
+  /* GALLERY - Edge to edge */
+  .clinic-preview-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    padding: 25px 20px;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  }
+
   .stack-item {
     width: 85px;
     height: 70px;
     margin-right: -20px;
   }
-  
+
   .bg-circle-1 {
     width: 250px;
     height: 250px;
     top: -40px;
     right: -40px;
   }
-  
+
   .bg-circle-2 {
     width: 200px;
     height: 200px;
     bottom: -30px;
     left: -30px;
   }
-  
+
   .bg-circle-3 {
     width: 150px;
     height: 150px;
     top: 30%;
   }
-  
+
   .nav-btn {
     display: none;
   }
-  
+
   .lightbox-img {
     max-height: 70vh;
   }
@@ -838,85 +916,207 @@
   .hero-content h1 {
     font-size: 2.3rem;
   }
-  
+
   .hero-gradient {
     font-size: 2.3rem;
   }
-  
+
   .hero-content p {
     font-size: 1rem;
   }
-  
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 300px;
     border-width: 4px;
   }
-  
+
   .badge-pill {
     padding: 8px 16px;
     font-size: 0.85rem;
   }
-  
+
   .floating-experience {
     padding: 10px 16px;
     bottom: -12px;
     right: 10px;
   }
-  
+
   .exp-content h3 {
     font-size: 1.8rem;
   }
-  
+
   .exp-content p {
     font-size: 0.85rem;
   }
-  
+
   .stack-item {
     width: 75px;
     height: 60px;
     margin-right: -15px;
   }
-  
+
+  /* GALLERY - Edge to edge */
   .clinic-preview-section {
-    padding: 20px;
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    padding: 20px 15px;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
   }
-  
+
   .doctor-badge {
     padding: 20px;
   }
-  
+
   .doctor-avatar {
     width: 50px;
     height: 50px;
     font-size: 1.5rem;
   }
-  
+
   .doctor-info h4 {
     font-size: 1rem;
   }
-  
+
   .doctor-info p {
     font-size: 0.85rem;
   }
-  
+
   .bg-circle-1 {
     width: 200px;
     height: 200px;
     top: -30px;
     right: -30px;
   }
-  
+
   .bg-circle-2 {
     width: 150px;
     height: 150px;
     bottom: -20px;
     left: -20px;
   }
-  
+
   .bg-circle-3 {
     width: 100px;
     height: 100px;
     top: 40%;
+  }
+}
+
+/* Very Small Phone (420px and below) */
+@media (max-width: 420px) {
+  .hero-section {
+    padding: 70px 0 20px;
+  }
+
+  .hero-container {
+    padding: 0 15px;
+    gap: 30px;
+  }
+
+  .hero-content h1 {
+    font-size: 1.9rem;
+    line-height: 1.15;
+  }
+
+  .hero-gradient {
+    font-size: 1.9rem;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-bottom: 1.5rem;
+    padding: 0 5px;
+  }
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
+  .doctor-main-img {
+    height: 260px;
+    border-width: 3px;
+    border-radius: var(--radius-lg);
+  }
+
+  .badge-pill {
+    padding: 7px 14px;
+    font-size: 0.8rem;
+    margin-bottom: 20px;
+  }
+
+  .hero-btns {
+    gap: 12px;
+    margin-bottom: 25px;
+    max-width: 100%;
+  }
+
+  .btn {
+    padding: 14px 20px;
+    font-size: 0.9rem;
+  }
+
+  .floating-experience {
+    padding: 8px 14px;
+    bottom: -10px;
+    right: 10px;
+  }
+
+  .exp-content h3 {
+    font-size: 1.6rem;
+  }
+
+  .exp-content p {
+    font-size: 0.75rem;
+  }
+
+  /* GALLERY - Edge to edge */
+  .clinic-preview-section {
+    position: relative;
+    width: 100vw;
+    left: 50%;
+    margin-left: -50vw;
+    padding: 15px 10px;
+    border-radius: 0;
+    box-shadow: none;
+    border-top: 1px solid var(--light-gray);
+    border-bottom: 1px solid var(--light-gray);
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  }
+
+  .photo-stack {
+    height: 80px;
+  }
+
+  .stack-item {
+    width: 70px;
+    height: 56px;
+    margin-right: -12px;
+    border-width: 2px;
+    border-radius: 8px;
+  }
+
+  .bg-circle-1 {
+    width: 180px;
+    height: 180px;
+    top: -25px;
+    right: -25px;
+  }
+
+  .bg-circle-2 {
+    width: 130px;
+    height: 130px;
+    bottom: -15px;
+    left: -15px;
+  }
+
+  .bg-circle-3 {
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -925,201 +1125,19 @@
   .hero-content h1 {
     font-size: 2rem;
   }
-  
+
   .hero-gradient {
     font-size: 2rem;
   }
-  
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 280px;
   }
-  
+
   .stack-item {
     width: 70px;
     height: 55px;
-  }
-}
-
-/* Very Small Phone (420px and below) */
-@media (max-width: 420px) {
-  .hero-section {
-    padding: 70px 15px 20px;
-  }
-  
-  .hero-container {
-    padding: 0;
-    gap: 30px;
-  }
-  
-  /* Fix heading size */
-  .hero-content h1 {
-    font-size: 1.9rem;
-    line-height: 1.15;
-  }
-  
-  .hero-gradient {
-    font-size: 1.9rem;
-  }
-  
-  /* Fix description */
-  .hero-content p {
-    font-size: 0.95rem;
-    line-height: 1.5;
-    margin-bottom: 1.5rem;
-    padding: 0 5px;
-  }
-  
-  /* Fix image size */
-  .doctor-main-img {
-    height: 260px;
-    border-width: 3px;
-    border-radius: var(--radius-lg);
-  }
-  
-  /* Fix badge */
-  .badge-pill {
-    padding: 7px 14px;
-    font-size: 0.8rem;
-    margin-bottom: 20px;
-  }
-  
-  /* Fix stats row */
-  .stats-row {
-    gap: 15px;
-    padding: 15px 0;
-    margin-bottom: 25px;
-  }
-  
-  .stat-item h3 {
-    font-size: 1.8rem;
-  }
-  
-  .stat-item span {
-    font-size: 0.8rem;
-  }
-  
-  /* Fix buttons */
-  .hero-btns {
-    gap: 12px;
-    margin-bottom: 25px;
-    max-width: 100%;
-  }
-  
-  .btn {
-    padding: 14px 20px;
-    font-size: 0.9rem;
-  }
-  
-  /* Fix floating badge */
-  .floating-experience {
-    padding: 8px 14px;
-    bottom: -10px;
-    right: 10px;
-  }
-  
-  .exp-content h3 {
-    font-size: 1.6rem;
-  }
-  
-  .exp-content p {
-    font-size: 0.75rem;
-  }
-  
-  /* Fix photo stack */
-  .photo-stack {
-    height: 80px;
-    justify-content: flex-start;
-    overflow-x: auto;
-    padding-bottom: 8px;
-    -webkit-overflow-scrolling: touch;
-  }
-  
-  .photo-stack::-webkit-scrollbar {
-    height: 3px;
-  }
-  
-  .stack-item {
-    width: 65px;
-    height: 52px;
-    margin-right: -12px;
-    border-width: 2px;
-    border-radius: 8px;
-  }
-  
-  .stack-item:hover {
-    transform: translateY(-5px) scale(1.05);
-    margin-right: 5px;
-  }
-  
-  /* Fix clinic preview section */
-  .clinic-preview-section {
-    padding: 15px;
-    border-radius: var(--radius-md);
-  }
-  
-  .preview-header {
-    margin-bottom: 15px;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 8px;
-  }
-  
-  .preview-label {
-    font-size: 0.8rem;
-    padding: 5px 10px;
-  }
-  
-  .rating-mini {
-    font-size: 0.8rem;
-  }
-  
-  /* Fix doctor badge */
-  .doctor-badge {
-    padding: 15px;
-    border-radius: var(--radius-md);
-  }
-  
-  .doctor-group {
-    gap: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .doctor-avatar {
-    width: 45px;
-    height: 45px;
-    font-size: 1.3rem;
-  }
-  
-  .doctor-info h4 {
-    font-size: 0.95rem;
-  }
-  
-  .doctor-info p {
-    font-size: 0.8rem;
-  }
-  
-  .verified-icon {
-    font-size: 0.9rem;
-  }
-  
-  /* Reduce background circles */
-  .bg-circle-1 {
-    width: 180px;
-    height: 180px;
-    top: -25px;
-    right: -25px;
-  }
-  
-  .bg-circle-2 {
-    width: 130px;
-    height: 130px;
-    bottom: -15px;
-    left: -15px;
-  }
-  
-  .bg-circle-3 {
-    width: 80px;
-    height: 80px;
   }
 }
 
@@ -1128,26 +1146,37 @@
   .hero-content h1 {
     font-size: 1.8rem;
   }
-  
+
   .hero-gradient {
     font-size: 1.8rem;
   }
-  
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 240px;
   }
-  
-  .stats-row {
-    flex-direction: column;
-    align-items: center;
-    gap: 12px;
+
+  .stack-item {
+    width: 65px;
+    height: 52px;
   }
-  
-  .stat-item {
-    width: 100%;
-    max-width: 120px;
+}
+
+/* Tiny Phone (320px and below) */
+@media (max-width: 320px) {
+  .hero-content h1 {
+    font-size: 1.6rem;
   }
-  
+
+  .hero-gradient {
+    font-size: 1.6rem;
+  }
+
+  /* DOCTOR IMAGE - EXACT ORIGINAL */
+  .doctor-main-img {
+    height: 220px;
+  }
+
   .stack-item {
     width: 60px;
     height: 48px;

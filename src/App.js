@@ -41,12 +41,12 @@ function App() {
       <KidsDental />
       <BookingForm />
 
-
       {/* Services Popup - Shows FULL Services component */}
       {showServicesPopup && (
         <div className="services-popup-overlay" onClick={closeServicesPopup}>
           <div className="services-popup-container" onClick={(e) => e.stopPropagation()}>
-            <button className="close-popup-btn" onClick={closeServicesPopup}>
+            {/* CHANGE THIS BUTTON CLASSNAME */}
+            <button className="services-popup-btn" onClick={closeServicesPopup}>
               ×
             </button>
 

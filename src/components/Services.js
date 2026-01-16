@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   FaTooth, FaSmile, FaChild, FaCrown, FaAlignCenter, 
   FaTeeth, FaTeethOpen, FaMagic, FaShieldAlt, FaStar, 
@@ -10,7 +10,6 @@ import './Services.css';
 const Services = ({ isPopup = false, onBookNow }) => {
   const [activeCategory, setActiveCategory] = useState('all');
   const [selectedService, setSelectedService] = useState(null);
-  const bookingClickedRef = useRef(false);
 
   useEffect(() => {
     if (isPopup) {
@@ -27,7 +26,7 @@ const Services = ({ isPopup = false, onBookNow }) => {
     { id: 'digital', name: 'Digital Dentistry', icon: <FaDesktop />, color: '#06b6d4' },
   ];
 
-  // ALL 13 SERVICES
+  // ALL 13 SERVICES - REMOVED FEATURES TAGS
   const allServices = [
     {
       id: 1,
@@ -35,7 +34,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Painless root canal therapy using advanced rotary endodontics.",
       icon: <FaTooth />,
       category: 'general',
-      features: ["Painless Procedure", "Single Visit", "Microscopic Precision", "High Success Rate"],
       details: "Advanced root canal treatment to save infected teeth with minimal discomfort."
     },
     {
@@ -44,7 +42,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Painless cavity treatment with laser technology.",
       icon: <FaMagic />,
       category: 'general',
-      features: ["No Drilling", "Painless", "Quick Recovery", "Precise"],
       details: "Modern laser technology for cavity treatment without traditional drilling."
     },
     {
@@ -53,7 +50,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Safe removal of impacted wisdom teeth with minimal discomfort.",
       icon: <FaTeethOpen />,
       category: 'general',
-      features: ["Painless Removal", "Quick Recovery", "Expert Surgical", "Digital X-Ray"],
       details: "Expert surgical extraction of wisdom teeth when needed."
     },
     {
@@ -62,7 +58,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Full mouth restoration with custom-made removable dentures.",
       icon: <FaTeeth />,
       category: 'general',
-      features: ["Custom Fit", "Natural Look", "Comfortable", "Durable"],
       details: "Complete oral rehabilitation with custom dentures."
     },
     {
@@ -71,7 +66,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Fixed implant-supported dentures for superior stability.",
       icon: <FaShieldAlt />,
       category: 'implant',
-      features: ["Non-Removable", "Secure Fit", "Bone Health", "Natural Function"],
       details: "Combines implant strength with denture convenience for best results."
     },
     {
@@ -80,7 +74,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Teeth alignment for perfect smile and bite correction.",
       icon: <FaAlignCenter />,
       category: 'ortho',
-      features: ["Metal Braces", "Ceramic Braces", "Bite Correction", "Customized"],
       details: "Professional teeth straightening for better function and aesthetics."
     },
     {
@@ -89,7 +82,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Invisible aligner treatment for discreet teeth straightening.",
       icon: <FaXRay />,
       category: 'ortho',
-      features: ["Invisible", "Removable", "Comfortable", "Custom Made"],
       details: "Modern alternative to traditional braces - nearly invisible treatment."
     },
     {
@@ -98,7 +90,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Strong and aesthetic metal-free crowns.",
       icon: <FaCrown />,
       category: 'cosmetic',
-      features: ["Metal-Free", "High Strength", "Natural Look", "Biocompatible"],
       details: "Durable and aesthetic crown solution that blends perfectly."
     },
     {
@@ -107,7 +98,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Premium ceramic crowns for superior aesthetics.",
       icon: <FaCrown />,
       category: 'cosmetic',
-      features: ["Superior Aesthetics", "Strong", "Natural Translucency", "Long-lasting"],
       details: "High-end ceramic crowns for the most natural-looking results."
     },
     {
@@ -116,7 +106,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Advanced digital technology for precise dental work.",
       icon: <FaDesktop />,
       category: 'digital',
-      features: ["Digital Impressions", "3D Scanning", "Precision", "Efficient"],
       details: "Cutting-edge digital technology for accurate dental procedures."
     },
     {
@@ -125,7 +114,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Permanent tooth replacement solution.",
       icon: <FaCrown />,
       category: 'implant',
-      features: ["Lifetime Solution", "Natural Look", "Bone Preservation", "Secure"],
       details: "Best long-term solution for missing teeth that functions naturally."
     },
     {
@@ -134,7 +122,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Thin porcelain shells for perfect smile transformation.",
       icon: <FaPaintBrush />,
       category: 'cosmetic',
-      features: ["Instant Transformation", "Stain Resistant", "Natural Look", "Minimal Prep"],
       details: "Fix chips, gaps, and discoloration with custom-made veneers."
     },
     {
@@ -143,7 +130,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
       description: "Computer-aided design and manufacturing for dental restorations.",
       icon: <FaRobot />,
       category: 'digital',
-      features: ["Digital Design", "Same Day Crowns", "Precision Fit", "Advanced Tech"],
       details: "Same-day crowns and restorations using advanced CAD/CAM technology."
     }
   ];
@@ -152,8 +138,10 @@ const Services = ({ isPopup = false, onBookNow }) => {
     ? allServices
     : allServices.filter(service => service.category === activeCategory);
 
-  // FIXED: This function ALWAYS works
-  const handleBookNowClick = () => {
+  // Handle Book Now button click
+  const handleBookNowClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     console.log('Book Now button clicked');
     
     // Close modal if open
@@ -161,88 +149,60 @@ const Services = ({ isPopup = false, onBookNow }) => {
       setSelectedService(null);
     }
     
-    // Mark that we clicked booking
-    bookingClickedRef.current = true;
-    
-    // Try immediate scroll
-    scrollToBooking();
-    
-    // Also try after a delay in case DOM isn't ready
-    setTimeout(scrollToBooking, 100);
-    setTimeout(scrollToBooking, 300);
-    setTimeout(scrollToBooking, 600);
+    // If we're in popup mode, use the onBookNow prop from App.js
+    if (isPopup && onBookNow) {
+      console.log('In popup mode, using onBookNow prop');
+      onBookNow();
+    } else {
+      // If not in popup mode, scroll to booking section directly
+      scrollToBookingSection();
+    }
   };
 
-  // FIXED: Separate function for scrolling
-  const scrollToBooking = () => {
-    console.log('Trying to scroll to booking...');
+  // Handle Book Consultation button click in modal
+  const handleBookConsultationClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    console.log('Book Consultation button clicked');
     
-    // Method 1: Try by ID first
-    const bookingElement = document.getElementById('booking');
+    // Close the service details modal
+    setSelectedService(null);
     
-    if (bookingElement) {
-      console.log('Found booking element by ID');
-      bookingElement.scrollIntoView({ 
+    // If we're in popup mode, use the onBookNow prop from App.js
+    if (isPopup && onBookNow) {
+      console.log('In popup mode, using onBookNow prop');
+      onBookNow();
+    } else {
+      // If not in popup mode, scroll to booking section directly
+      scrollToBookingSection();
+    }
+  };
+
+  // Scroll to booking section function (for when NOT in popup mode)
+  const scrollToBookingSection = () => {
+    console.log('Trying to scroll to booking section...');
+    
+    const bookingSection = document.getElementById('booking-section');
+    
+    if (bookingSection) {
+      console.log('Found booking-section element');
+      bookingSection.scrollIntoView({ 
         behavior: 'smooth', 
-        block: 'center'
+        block: 'start'
       });
       
-      // Highlight it
-      bookingElement.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.5)';
-      bookingElement.style.transition = 'box-shadow 0.5s ease';
+      // Highlight the section
+      bookingSection.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.5)';
+      bookingSection.style.transition = 'box-shadow 0.5s ease';
       
       setTimeout(() => {
-        bookingElement.style.boxShadow = '';
+        bookingSection.style.boxShadow = '';
       }, 2000);
       
       return true;
     }
     
-    // Method 2: Try by class
-    const bookingByClass = document.querySelector('.booking-section, .booking-form, [class*="booking"]');
-    if (bookingByClass) {
-      console.log('Found booking element by class');
-      bookingByClass.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center'
-      });
-      return true;
-    }
-    
-    // Method 3: Try to find any form
-    const anyForm = document.querySelector('form, .form, [class*="form"]');
-    if (anyForm) {
-      console.log('Found form element');
-      anyForm.scrollIntoView({ 
-        behavior: 'smooth', 
-        block: 'center'
-      });
-      return true;
-    }
-    
-    // Method 4: Try URL hash
-    if (window.location.hash !== '#booking') {
-      window.location.hash = '#booking';
-      console.log('Set URL hash to #booking');
-      return true;
-    }
-    
-    // Method 5: Last resort - scroll to bottom
-    console.log('Scrolling to bottom as last resort');
-    window.scrollTo({
-      top: document.body.scrollHeight,
-      behavior: 'smooth'
-    });
-    
-    // Try to find it again after scrolling
-    setTimeout(() => {
-      const found = document.getElementById('booking') || 
-                   document.querySelector('.booking-section');
-      if (found) {
-        found.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-    }, 800);
-    
+    console.log('Booking section not found');
     return false;
   };
 
@@ -263,29 +223,8 @@ const Services = ({ isPopup = false, onBookNow }) => {
           <div className="services-badge">
             <FaTooth className="badge-icon" /> Our Services
           </div>
-          <h2 className="services-title">
-            Comprehensive Dental <span className="highlight-text">Care</span>
-          </h2>
-          <p className="services-subtitle">
-            Advanced dental treatments using latest technology for optimal oral health.
-          </p>
         </div>
-
-        {/* Category Filter */}
-        <div className="category-filter">
-          {serviceCategories.map((category) => (
-            <button
-              key={category.id}
-              className={`category-btn ${activeCategory === category.id ? 'active' : ''}`}
-              onClick={() => setActiveCategory(category.id)}
-              style={{ '--cat-color': category.color }}
-            >
-              <span className="category-icon">{category.icon}</span>
-              {category.name}
-            </button>
-          ))}
-        </div>
-
+        
         {/* Services Grid */}
         <div className="services-grid">
           {filteredServices.map((service) => (
@@ -304,26 +243,13 @@ const Services = ({ isPopup = false, onBookNow }) => {
 
               <p className="service-description">{service.description}</p>
 
-              <div className="service-features">
-                {service.features.slice(0, 3).map((feature, index) => (
-                  <span key={index} className="feature-tag">
-                    <FaCheck className="feature-check" /> {feature}
-                  </span>
-                ))}
-              </div>
-
               <div className="service-actions">
                 <button className="details-btn" onClick={() => openServiceDetails(service)}>
                   View Details
                 </button>
                 <button 
                   className="book-btn" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Service card Book Now clicked:', service.title);
-                    handleBookNowClick();
-                  }}
+                  onClick={handleBookNowClick}
                   style={{ cursor: 'pointer' }}
                 >
                   Book Now <FaArrowRight />
@@ -331,43 +257,6 @@ const Services = ({ isPopup = false, onBookNow }) => {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* Stats */}
-        <div className="services-stats">
-          <div className="stat-item">
-            <h3>13+</h3>
-            <p>Specialized Services</p>
-          </div>
-          <div className="stat-item">
-            <h3>18+</h3>
-            <p>Years Experience</p>
-          </div>
-          <div className="stat-item">
-            <h3>98%</h3>
-            <p>Success Rate</p>
-          </div>
-          <div className="stat-item">
-            <h3>4.9★</h3>
-            <p>Patient Rating</p>
-          </div>
-        </div>
-
-        {/* Debug info - remove in production */}
-        <div style={{ 
-          position: 'fixed', 
-          bottom: '10px', 
-          right: '10px', 
-          background: 'rgba(0,0,0,0.8)', 
-          color: 'white', 
-          padding: '10px', 
-          borderRadius: '5px',
-          fontSize: '12px',
-          zIndex: 9999,
-          display: 'none' /* Change to 'block' for debugging */
-        }}>
-          <div>Booking Element: {document.getElementById('booking') ? 'FOUND' : 'NOT FOUND'}</div>
-          <div>URL Hash: {window.location.hash}</div>
         </div>
 
       </div>
@@ -392,28 +281,11 @@ const Services = ({ isPopup = false, onBookNow }) => {
 
             <div className="modal-content">
               <p className="modal-description">{selectedService.details}</p>
-              
-              <div className="modal-features">
-                <h4>Key Benefits</h4>
-                <ul>
-                  {selectedService.features.map((feature, index) => (
-                    <li key={index}>
-                      <FaCheck /> {feature}
-                    </li>
-                  ))}
-                </ul>
-              </div>
 
               <div className="modal-cta">
                 <button 
                   className="modal-book-btn" 
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Modal Book Consultation clicked');
-                    closeServiceDetails();
-                    handleBookNowClick();
-                  }}
+                  onClick={handleBookConsultationClick}
                   style={{ cursor: 'pointer' }}
                 >
                   Book Consultation

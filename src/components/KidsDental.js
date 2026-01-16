@@ -80,15 +80,15 @@ const KidsDental = () => {
       const video = videoRef.current;
       const handlePause = () => setIsVideoPaused(true);
       const handlePlay = () => setIsVideoPaused(false);
-      
+
       video.addEventListener('pause', handlePause);
       video.addEventListener('play', handlePlay);
-      
+
       // Check initial state
       if (video.paused) {
         setIsVideoPaused(true);
       }
-      
+
       return () => {
         video.removeEventListener('pause', handlePause);
         video.removeEventListener('play', handlePlay);
@@ -116,7 +116,7 @@ const KidsDental = () => {
 
   return (
     <section className="kids-dental-section" id="kids-dental">
-      
+
       {/* Lightbox Overlay */}
       {isOpen && (
         <div className="lightbox-overlay" onClick={closeLightbox}>
@@ -154,61 +154,28 @@ const KidsDental = () => {
 
       {/* Kids Dental Content Container */}
       <div className="kids-container">
-        
+
         {/* Left Content Side */}
         <div className="kids-content">
-          
+
           {/* Special Badge for Kids */}
           <div className="kids-badge bounce-in">
             <FaChild className="badge-icon" /> Child-Friendly Zone
           </div>
-          
+
           {/* Main Heading - Special Kids Section */}
           <h1 className="kids-heading slide-up-text">
             <span className="kids-main-text">Where Little Smiles</span>
             <span className="kids-gradient-text"> Grow Happily!</span>
           </h1>
-          
+
           {/* Description - Kids Focused */}
           <p className="kids-description fade-in-text">
-            Our vibrant, toy-filled pediatric dental zone is specially designed to 
-            make dental visits fun and fear-free. With colorful interiors, engaging 
-            activities, and gentle care, we transform dental checkups into exciting 
+            Our vibrant, toy-filled pediatric dental zone is specially designed to
+            make dental visits fun and fear-free. With colorful interiors, engaging
+            activities, and gentle care, we transform dental checkups into exciting
             adventures for your little ones.
           </p>
-
-          {/* Kids Special Features */}
-          <div className="kids-features fade-in-up">
-            <div className="feature-item">
-              <div className="feature-icon">
-                <FaSmile />
-              </div>
-              <div className="feature-text">
-                <h4>Fear-Free Environment</h4>
-                <p>Toys, games & happy vibes</p>
-              </div>
-            </div>
-            
-            <div className="feature-item">
-              <div className="feature-icon">
-                <FaHeart />
-              </div>
-              <div className="feature-text">
-                <h4>Gentle Pediatric Care</h4>
-                <p>Specialized kids dentists</p>
-              </div>
-            </div>
-            
-            <div className="feature-item">
-              <div className="feature-icon">
-                <FaStar />
-              </div>
-              <div className="feature-text">
-                <h4>Fun Learning Zone</h4>
-                <p>Interactive dental education</p>
-              </div>
-            </div>
-          </div>
 
           {/* Special Services for Kids */}
           <div className="kids-services fade-in-up-delay">
@@ -224,12 +191,32 @@ const KidsDental = () => {
           </div>
 
           {/* CTA Button */}
-          <div className="kids-cta fade-in-up">
+          {/* <div className="kids-cta fade-in-up">
             <a href="#contact" className="btn btn-kids-primary">
               Book Kids Appointment
             </a>
-            <a href="#gallery" className="btn btn-kids-secondary">
-              Meet Our Pediatric Team
+          </div> */}
+          <div className="kids-cta fade-in-up">
+            <a
+              href="#booking-section"
+              className="btn btn-kids-primary"
+              onClick={(e) => {
+                e.preventDefault();
+                const bookingSection = document.getElementById('booking-section');
+                if (bookingSection) {
+                  bookingSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                  // Highlight the section
+                  bookingSection.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.5)';
+                  bookingSection.style.transition = 'box-shadow 0.5s ease';
+
+                  setTimeout(() => {
+                    bookingSection.style.boxShadow = '';
+                  }, 2000);
+                }
+              }}
+            >
+              Book Kids Appointment
             </a>
           </div>
 
@@ -237,7 +224,7 @@ const KidsDental = () => {
 
         {/* Right Image Side */}
         <div className="kids-image-section">
-          
+
           {/* Main Kids Area Video */}
           <div className="kids-video-container">
             <video
@@ -256,16 +243,16 @@ const KidsDental = () => {
                 className="kids-video-fallback"
               />
             </video>
-            
+
             {/* Play/Pause Overlay */}
-            <div 
-              className="video-play-overlay" 
+            <div
+              className="video-play-overlay"
               onClick={handlePlayVideo}
               style={{ opacity: isVideoPaused ? 1 : 0 }}
             >
               {isVideoPaused ? <FaPlay /> : <FaPause />}
             </div>
-            
+
             {/* Floating Fun Badge */}
             <div className="floating-fun-badge">
               <div className="fun-content">
@@ -283,7 +270,7 @@ const KidsDental = () => {
                 <FaStar color="#f59e0b" /> 5.0 (Happy Parents)
               </div>
             </div>
-            
+
             <div className="kids-photo-grid">
               {kidsImages.slice(0, 6).map((imgUrl, index) => (
                 <div

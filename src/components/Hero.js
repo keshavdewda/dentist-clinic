@@ -151,9 +151,6 @@ const Hero = () => {
             <a href="#booking-section" className="btn btn-primary-hero">
               Book Free Consultation <FaArrowRight className="btn-icon" />
             </a>
-            <a href="#gallery" className="btn btn-secondary-hero">
-              View Our Gallery
-            </a>
           </div>
 
           {/* Doctor Badge */}
