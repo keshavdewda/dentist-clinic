@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import {
-  FaTooth, FaSmile, FaChild, FaCrown, FaAlignCenter, 
+  FaTooth, FaSmile, FaCrown, FaAlignCenter, 
   FaTeeth, FaTeethOpen, FaMagic, FaShieldAlt, FaStar, 
-  FaArrowRight, FaCheck, FaPaintBrush, FaDesktop,
+  FaArrowRight, FaPaintBrush, FaDesktop,
   FaRobot, FaXRay
 } from 'react-icons/fa';
 import './Services.css';
