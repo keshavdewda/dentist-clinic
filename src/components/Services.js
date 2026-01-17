@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
-  FaTooth, FaSmile, FaChild, FaCrown, FaAlignCenter, 
-  FaTeeth, FaTeethOpen, FaMagic, FaShieldAlt, FaStar, 
-  FaArrowRight, FaCheck, FaPaintBrush, FaDesktop,
+  FaTooth, FaSmile, FaCrown, FaAlignCenter,
+  FaTeeth, FaTeethOpen, FaMagic, FaShieldAlt, FaStar,
+  FaArrowRight, FaPaintBrush, FaDesktop,
   FaRobot, FaXRay
 } from 'react-icons/fa';
 import './Services.css';
 
 
 const Services = ({ isPopup = false, onBookNow }) => {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const [activeCategory] = useState('all');
   const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
@@ -144,12 +144,12 @@ const Services = ({ isPopup = false, onBookNow }) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Book Now button clicked');
-    
+
     // Close modal if open
     if (selectedService) {
       setSelectedService(null);
     }
-    
+
     // If we're in popup mode, use the onBookNow prop from App.js
     if (isPopup && onBookNow) {
       console.log('In popup mode, using onBookNow prop');
@@ -165,10 +165,10 @@ const Services = ({ isPopup = false, onBookNow }) => {
     e.preventDefault();
     e.stopPropagation();
     console.log('Book Consultation button clicked');
-    
+
     // Close the service details modal
     setSelectedService(null);
-    
+
     // If we're in popup mode, use the onBookNow prop from App.js
     if (isPopup && onBookNow) {
       console.log('In popup mode, using onBookNow prop');
@@ -182,27 +182,27 @@ const Services = ({ isPopup = false, onBookNow }) => {
   // Scroll to booking section function (for when NOT in popup mode)
   const scrollToBookingSection = () => {
     console.log('Trying to scroll to booking section...');
-    
+
     const bookingSection = document.getElementById('booking-section');
-    
+
     if (bookingSection) {
       console.log('Found booking-section element');
-      bookingSection.scrollIntoView({ 
-        behavior: 'smooth', 
+      bookingSection.scrollIntoView({
+        behavior: 'smooth',
         block: 'start'
       });
-      
+
       // Highlight the section
       bookingSection.style.boxShadow = '0 0 0 4px rgba(37, 99, 235, 0.5)';
       bookingSection.style.transition = 'box-shadow 0.5s ease';
-      
+
       setTimeout(() => {
         bookingSection.style.boxShadow = '';
       }, 2000);
-      
+
       return true;
     }
-    
+
     console.log('Booking section not found');
     return false;
   };
@@ -218,14 +218,14 @@ const Services = ({ isPopup = false, onBookNow }) => {
   return (
     <section className={`services-section ${isPopup ? 'popup-view' : ''}`} id={isPopup ? undefined : "services-section"}>
       <div className="services-container">
-        
+
         {/* Header */}
         <div className="services-header">
           <div className="services-badge">
             <FaTooth className="badge-icon" /> Our Services
           </div>
         </div>
-        
+
         {/* Services Grid */}
         <div className="services-grid">
           {filteredServices.map((service) => (
@@ -248,8 +248,8 @@ const Services = ({ isPopup = false, onBookNow }) => {
                 <button className="details-btn" onClick={() => openServiceDetails(service)}>
                   View Details
                 </button>
-                <button 
-                  className="book-btn" 
+                <button
+                  className="book-btn"
                   onClick={handleBookNowClick}
                   style={{ cursor: 'pointer' }}
                 >
@@ -267,7 +267,7 @@ const Services = ({ isPopup = false, onBookNow }) => {
         <div className="service-modal-overlay" onClick={closeServiceDetails}>
           <div className="service-modal" onClick={(e) => e.stopPropagation()}>
             <button className="close-modal" onClick={closeServiceDetails}>×</button>
-            
+
             <div className="modal-header">
               <div className="modal-icon" style={{ backgroundColor: `${serviceCategories.find(c => c.id === selectedService.category)?.color}15` }}>
                 {selectedService.icon}
@@ -284,8 +284,8 @@ const Services = ({ isPopup = false, onBookNow }) => {
               <p className="modal-description">{selectedService.details}</p>
 
               <div className="modal-cta">
-                <button 
-                  className="modal-book-btn" 
+                <button
+                  className="modal-book-btn"
                   onClick={handleBookConsultationClick}
                   style={{ cursor: 'pointer' }}
                 >
