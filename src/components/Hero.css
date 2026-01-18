@@ -526,23 +526,28 @@
     opacity: 0;
     transform: scale(0.3);
   }
+
   50% {
     opacity: 1;
     transform: scale(1.05);
   }
+
   70% {
     transform: scale(0.9);
   }
+
   100% {
     transform: scale(1);
   }
 }
 
 @keyframes float {
+
   0%,
   100% {
     transform: translateY(0);
   }
+
   50% {
     transform: translateY(-10px);
   }
@@ -553,6 +558,7 @@
     opacity: 0;
     transform: translateY(30px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -650,6 +656,7 @@
 .nav-left {
   left: 20px;
 }
+
 .nav-right {
   right: 20px;
 }
@@ -693,6 +700,7 @@
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -703,6 +711,7 @@
     transform: scale(0.9);
     opacity: 0.5;
   }
+
   to {
     transform: scale(1);
     opacity: 1;
@@ -832,14 +841,24 @@
 
   /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
-    height: 350px;
+  height: 366px;
+  width: 409px;
+  max-width: calc(100% - 20px); /* Prevents overflow, equal 10px margins */
+  margin: 0 auto;
+  display: block;
+  border-width: 6px;
+  transform: none;
+}
+  /* .doctor-main-img {
+    height: 366px;
+    width: 409px;
     border-width: 6px;
     transform: none;
   }
 
   .doctor-main-img:hover {
     transform: none;
-  }
+  } */
 
   .hero-btns {
     flex-direction: column;
@@ -927,7 +946,9 @@
 
   /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
-    height: 300px;
+    /* height: 300px; */
+    height: 366px;
+    width: 409px;
     border-width: 4px;
   }
 
@@ -1009,6 +1030,16 @@
   }
 }
 
+/* @media (max-width: 455px) {
+doctor-main-img {
+    height: 365px;
+    width: 315px;
+    border-width: 3px;
+    border-radius: var(--radius-lg);
+  }
+
+} */
+
 /* Very Small Phone (420px and below) */
 @media (max-width: 420px) {
   .hero-section {
@@ -1038,7 +1069,8 @@
 
   /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
-    height: 260px;
+    height: 365px;
+    width: 332px;
     border-width: 3px;
     border-radius: var(--radius-lg);
   }
@@ -1133,6 +1165,7 @@
   /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 280px;
+    width: 301px;
   }
 
   .stack-item {
@@ -1152,9 +1185,9 @@
   }
 
   /* DOCTOR IMAGE - EXACT ORIGINAL */
-  .doctor-main-img {
+  /* .doctor-main-img {
     height: 240px;
-  }
+  } */
 
   .stack-item {
     width: 65px;
@@ -1175,6 +1208,7 @@
   /* DOCTOR IMAGE - EXACT ORIGINAL */
   .doctor-main-img {
     height: 220px;
+    width: 240px;
   }
 
   .stack-item {

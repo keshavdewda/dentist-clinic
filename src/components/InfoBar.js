@@ -1,4 +1,3 @@
-import React from 'react';
 import { FaPhoneAlt, FaClock, FaAward } from 'react-icons/fa';
 import './InfoBar.css';
 
